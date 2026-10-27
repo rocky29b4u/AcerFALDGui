@@ -1,6 +1,6 @@
 # AcerFALDv2 — portable source
 
-Self-contained WinForms build of FaldSync (version 2.2). It reuses the `FaldSync` engine project
+Self-contained WinForms build of FaldSync (version 2.3). It reuses the `FaldSync` engine project
 and the same UI source, with its own assembly name, single-instance mutex, tray identity, and
 output folder.
 
@@ -41,6 +41,13 @@ README.txt
 ```
 
 `AcerFALDv2-portable.zip` is the same three files under an `AcerFALDv2\` folder.
+
+## Icon
+
+`installer\make-icon.ps1` draws `installer\AcerFALDGui.ico`. The csproj uses it twice: as
+`ApplicationIcon`, which becomes the exe icon Explorer and the shortcuts show, and as an embedded
+resource, which `AppIcon` reads at runtime so the window (32 px) and the tray (16 px) match it
+instead of a separate hand-drawn bitmap.
 
 ## Notes
 

@@ -14,13 +14,20 @@
     <InvariantGlobalization>true</InvariantGlobalization>
 
     <Product>FaldSync UI</Product>
-    <Version>1.3.0</Version>
-    <FileVersion>1.3.0.0</FileVersion>
-    <AssemblyVersion>1.3.0.0</AssemblyVersion>
+    <Version>1.4.0</Version>
+    <FileVersion>1.4.0.0</FileVersion>
+    <AssemblyVersion>1.4.0.0</AssemblyVersion>
+
+    <!-- Same icon as AcerFALDv2; see installer\make-icon.ps1. -->
+    <ApplicationIcon>..\..\installer\AcerFALDGui.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FaldSync\FaldSync.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\installer\AcerFALDGui.ico" LogicalName="AcerFALDGui.ico" />
   </ItemGroup>
 
   <ItemGroup>

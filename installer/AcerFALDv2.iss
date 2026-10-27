@@ -13,11 +13,11 @@
 ;  input and theme settings survive a reinstall.
 ;
 ;  Build with installer\build-installer.ps1 (preferred) or directly with
-;  ISCC.exe /DMyAppVersion=2.2.0 installer\AcerFALDv2.iss
+;  ISCC.exe /DMyAppVersion=2.3.0 installer\AcerFALDv2.iss
 ; ---------------------------------------------------------------------------
 
 #ifndef MyAppVersion
-  #define MyAppVersion "2.2.0"
+  #define MyAppVersion "2.3.0"
 #endif
 
 #define MyAppName "AcerFALDv2"
@@ -65,6 +65,9 @@ OutputBaseFilename=AcerFALDv2-Setup-{#MyAppVersion}
 Compression=lzma2/max
 SolidCompression=yes
 WizardStyle=modern
+; Setup, the uninstaller and the Add/Remove Programs entry use the same
+; artwork as the exe; shortcuts inherit it from the exe itself.
+SetupIconFile=AcerFALDGui.ico
 SetupLogging=yes
 UninstallDisplayIcon={app}\{#MyAppExeName}
 UninstallDisplayName={#MyAppName}

@@ -16,9 +16,13 @@
     <Product>AcerFALDv2</Product>
     <Title>AcerFALDv2</Title>
     <Description>Portable HDR + FALD control for Acer XV275K P5</Description>
-    <Version>2.2.0</Version>
-    <FileVersion>2.2.0.0</FileVersion>
-    <AssemblyVersion>2.2.0.0</AssemblyVersion>
+    <Version>2.3.0</Version>
+    <FileVersion>2.3.0.0</FileVersion>
+    <AssemblyVersion>2.3.0.0</AssemblyVersion>
+
+    <!-- Icon drawn by installer\make-icon.ps1: the exe, the shortcuts Windows
+         creates from it, the window, the taskbar and the tray all use it. -->
+    <ApplicationIcon>..\..\installer\AcerFALDGui.ico</ApplicationIcon>
 
     <!-- Portable single-file publish: the RID and self-contained flag are supplied by
          the publish command (see README) so a plain `dotnet build` still works. -->
@@ -33,6 +37,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FaldSync\FaldSync.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The same artwork, embedded so the window and tray icon match the exe at
+         whatever DPI the session runs at. -->
+    <EmbeddedResource Include="..\..\installer\AcerFALDGui.ico" LogicalName="AcerFALDGui.ico" />
   </ItemGroup>
 
   <!-- The engine project also ships a faldsync.json template. Let that publish first,

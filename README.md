@@ -11,8 +11,8 @@ Target hardware: Acer Nitro **XV275K P5** (4K 160 Hz, Mini-LED FALD, DisplayHDR 
 The approach is generic DDC/CI + the Windows display configuration API, so other MCCS monitors
 can be supported later.
 
-**Repository:** [AcerFALDGui](https://github.com/rocky29b4u/AcerFALDGui) · **Release:** v1.2.0 ·
-**Portable build:** AcerFALDv2 2.2.0 · **Tray UI:** 1.3.0
+**Repository:** [AcerFALDGui](https://github.com/rocky29b4u/AcerFALDGui) · **Release:** v1.3.0 ·
+**Portable build:** AcerFALDv2 2.3.0 · **Tray UI:** 1.4.0
 
 ---
 
@@ -20,7 +20,7 @@ can be supported later.
 
 Two ways to run it, both self-contained — no .NET installation is required:
 
-**Installer (recommended)** — `AcerFALDv2-Setup-2.2.0.exe`
+**Installer (recommended)** — `AcerFALDv2-Setup-2.3.0.exe`
 
 1. Run the setup. Windows asks for administrator rights, because it writes to `C:\AcerFALDv2`.
 2. Choose the folder, then tick the shortcuts you want: **desktop**, **Start Menu** and
@@ -34,7 +34,7 @@ only, because the app saves `faldsync.json` and `faldsync.log` next to its exe a
 do that without elevation. Silent install for scripts:
 
 ```powershell
-.\AcerFALDv2-Setup-2.2.0.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART `
+.\AcerFALDv2-Setup-2.3.0.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART `
   /DIR="C:\AcerFALDv2" /TASKS="desktopicon,startmenuicon,startupicon"
 ```
 
@@ -127,7 +127,7 @@ prototype/FaldSync.UI/     .NET 8 tray UI (theme toggle, brightness/contrast/SDR
 prototype/AcerFALDv2/      source for the portable self-contained UI build
 AcerFALDv2/                runnable portable build: AcerFALDv2.exe + faldsync.json + README
 AcerFALDv2-portable.zip    zipped copy of the portable build
-installer/                 Inno Setup script and build script for the Windows installer
+installer/                 Inno Setup script, build script and the generated icon
 prototype/Start FaldSync.cmd       console watcher start
 prototype/Stop FaldSync.cmd        console watcher stop
 prototype/Start FaldSync UI.cmd    tray UI start
@@ -141,6 +141,8 @@ prototype/Stop FaldSync UI.cmd     tray UI stop
 | Document | What it covers |
 | --- | --- |
 | [CHANGELOG.md](CHANGELOG.md) | release history; source of truth for the repository version |
+| [docs/releases/v1.3.0.md](docs/releases/v1.3.0.md) | v1.3.0 release notes: the app icon, checksums, upgrade notes |
+| [docs/releases/v1.2.0.md](docs/releases/v1.2.0.md) | v1.2.0 release notes: first public release as AcerFALDGui |
 | [docs/releases/v1.1.0.md](docs/releases/v1.1.0.md) | v1.1.0 release notes: installer, checksums, upgrade notes |
 | [docs/releases/v1.0.0.md](docs/releases/v1.0.0.md) | v1.0.0 release notes, install steps and checksums |
 | [installer/README.md](installer/README.md) | installer behaviour, wizard options, silent switches, how to build |
@@ -342,6 +344,7 @@ Next step: global hotkeys/profiles.
 
 The repository follows [Semantic Versioning](https://semver.org/) through
 [CHANGELOG.md](CHANGELOG.md); **1.0.0** was the first tracked release, **1.1.0** added the Windows
-installer and **1.2.0** is the first public release of this repository. Component builds keep their
-own numbers — AcerFALDv2 2.2.0 is the portable exe and the installer payload, and FaldSync UI 1.3.0
-is the framework-dependent tray app — and both are listed in the release notes.
+installer, **1.2.0** is the first public release of this repository and **1.3.0** gave the app its
+icon. Component builds keep their own numbers — AcerFALDv2 2.3.0 is the portable exe and the
+installer payload, and FaldSync UI 1.4.0 is the framework-dependent tray app — and both are listed
+in the release notes.

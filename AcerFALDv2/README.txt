@@ -1,7 +1,7 @@
 AcerFALDv2
 ===========
 
-Portable build 2.2.0 (repository release v1.2.0).
+Portable build 2.3.0 (repository release v1.3.0).
 
 Self-contained version of FaldSync for the Acer Nitro XV275K P5.
 

@@ -25,6 +25,7 @@ public sealed class MainForm : Form
     private ContextMenuStrip? _trayMenu;
     private ToolStripMenuItem? _themeMenuItem;
     private Icon? _appIcon;
+    private Icon? _windowIcon;
     private readonly ToolTip _toolTip = new();
 
     private readonly SemaphoreSlim _ddcGate = new(1, 1);
@@ -776,7 +777,8 @@ public sealed class MainForm : Form
         try
         {
             _appIcon = AppIcon.Create();
-            Icon = _appIcon;
+            _windowIcon = AppIcon.CreateWindowIcon();
+            Icon = _windowIcon;
 
             _trayMenu = new ContextMenuStrip();
             var open = new ToolStripMenuItem("Open AcerFALDv2");
@@ -1278,6 +1280,9 @@ public sealed class MainForm : Form
 
         _appIcon?.Dispose();
         _appIcon = null;
+
+        _windowIcon?.Dispose();
+        _windowIcon = null;
 
         _config.Save();
         _ddcGate.Dispose();
