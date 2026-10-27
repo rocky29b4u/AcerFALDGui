@@ -1,0 +1,22 @@
+{
+  "modelMatch": "XV275K",
+  "displayModeVcp": 226,
+  "hdrDisplayMode": 11,
+  "sdrDisplayMode": 0,
+  "hdrPictureMode": 6,
+  "sdrPictureMode": null,
+  "hdrBrightness": 50,
+  "hdrContrast": 55,
+  "sdrBrightness": 20,
+  "sdrContrast": 20,
+  "sdrWhiteNits": 180,
+  "gammaFix": true,
+  "gammaPower": 2.2,
+  "selectedInput": 15,
+  "autoSwitchInput": false,
+  "theme": "dark",
+  "pollMs": 1000,
+  "settleMs": 3000,
+  "preSettleMs": 1200,
+  "userSettleMs": 1200
+}

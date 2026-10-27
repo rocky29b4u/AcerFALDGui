@@ -1,0 +1,70 @@
+# ---------------------------------------------------------------------------
+# Secrets & machine-specific files - never commit these
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.env
+secrets.json
+secrets.*.json
+credentials.json
+!credentials.json.example
+token.json
+*.pem
+*.key
+*.pfx
+*.p12
+*.p8
+*.cer
+*.crt
+*.jks
+*.keystore
+*.kdbx
+*.ovpn
+.netrc
+.npmrc
+.pypirc
+id_rsa*
+id_ed25519*
+*.user
+*.suo
+
+# ---------------------------------------------------------------------------
+# Compiled output / binaries - no executables in the repo
+# ---------------------------------------------------------------------------
+[Bb]in/
+[Oo]bj/
+[Pp]ublish/
+*.exe
+*.dll
+*.pdb
+*.msi
+*.nupkg
+*.snupkg
+*.lib
+*.exp
+*.ilk
+*.log
+
+# Prebuilt portable distribution and archive
+/AcerFALDv2-portable/
+/dist/
+*.zip
+
+# Reference screenshots of the vendor UI: analysis material, never published
+/replica/screens/
+
+# ---------------------------------------------------------------------------
+# IDE / OS noise
+# ---------------------------------------------------------------------------
+.vs/
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/tasks.json
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~

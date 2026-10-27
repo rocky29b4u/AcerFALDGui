@@ -1,0 +1,115 @@
+# Changelog
+
+All notable changes to this project are documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+## [1.2.0] - 2026-10-27
+
+First public release, published as **AcerFALDGui**. The application is unchanged: **AcerFALDv2
+2.2.0** (portable, self-contained) and **FaldSync UI 1.3.0** (framework-dependent).
+
+### Changed
+
+- Documentation, release notes and the installer's publisher, support and update links now point at
+  the public repository `rocky29b4u/AcerFALDGui` instead of the private working repository.
+- Reference screenshots of the original Acer Display Widget, captured only during recon, are no
+  longer tracked or published: they are vendor UI artwork. The written findings in `replica/`
+  stay, so the DDC map, the FALD gate and the feature matrix are still documented.
+
+### Notes
+
+- The application binaries are identical to v1.1.0. Only the installer was rebuilt, so its support
+  and update links reach the public repository, and the portable zip carries the updated
+  `README.txt`.
+- Full release notes: [docs/releases/v1.2.0.md](docs/releases/v1.2.0.md).
+
+## [1.1.0] - 2026-10-27
+
+Adds a Windows installer. The payload is unchanged: **AcerFALDv2 2.2.0** (portable,
+self-contained) and **FaldSync UI 1.3.0** (framework-dependent).
+
+### Added
+
+- Windows installer (`AcerFALDv2-Setup-2.2.0.exe`, built with Inno Setup 6) that installs the
+  portable build and asks during setup which entries to create: desktop shortcut, Start Menu
+  shortcut, and start automatically with Windows. All three are offered and ticked by default.
+- Entry in Settings → Apps with an uninstaller, `App Paths` registration so `Win+R` → `AcerFALDv2`
+  works, and a finish-page checkbox to start the app straight away.
+- A second check that refuses a drive root as destination, so a scripted
+  `setup.exe /DIR=C:\` cannot dump the app into `C:\` even though Inno Setup already rejects it.
+- `installer/` build script that stamps the installer with the payload's version, writes
+  `dist\AcerFALDv2-Setup-<version>.exe` and prints both SHA-256 hashes for release notes, plus
+  installer documentation covering every wizard option and silent switch.
+
+### Changed
+
+- The README download section now leads with the installer and keeps the portable zip as the
+  no-install option.
+- The shipped `README.txt` explains the installed copy and the portable zip separately instead of
+  claiming nothing is installed.
+
+### Fixed
+
+- Upgrading with a shortcut unticked used to leave the shortcut the previous version created; the
+  installer now deletes the shortcuts whose task was cleared.
+- The uninstaller asked whether to delete `faldsync.json` with a message box that stalled silent
+  uninstalls forever; the question is now asked only when a user is actually watching.
+
+### Notes
+
+- The installer needs administrator rights (it writes to `C:\` and to `HKLM`) and Windows 10 1809
+  or later. It grants `Users` modify rights on its own folder only, because the app writes
+  `faldsync.json` and `faldsync.log` next to its exe.
+- Settings survive an upgrade and, by default, an uninstall.
+- Verified with Inno Setup 6.7.3: every task combination, settings preserved across a reinstall,
+  shortcut removal, drive-root rejection, and both silent and interactive uninstall.
+- Full release notes: [docs/releases/v1.1.0.md](docs/releases/v1.1.0.md).
+
+## [1.0.0] - 2026-10-27
+
+First release. The repository version is 1.0.0; the shipped components are **AcerFALDv2 2.2.0**
+(portable, self-contained) and **FaldSync UI 1.3.0** (framework-dependent).
+
+### Added
+
+- HDR + FALD automation for the Acer Nitro XV275K P5: forced User → HDR transition, settle and
+  verification, brightness/contrast control while HDR is on, and restore to the SDR User preset.
+- Windows SDR content white control (80–480 nits, 4-nit steps), applied on HDR entry and wake.
+- Optional reversible gamma 2.2 scanout correction for SDR content inside HDR, re-applied after
+  sleep/unlock and restored on HDR off or exit.
+- Dark-first tray UI with an in-place light theme, debounced brightness/contrast/SDR-white/volume
+  sliders, HDR and gamma toggles, re-apply/restore actions, minimize-to-tray, and saved settings.
+- Monitor speaker volume over VCP `0x62` and input selection over VCP `0x60`
+  (DP, HDMI 1, HDMI 2, DP ALT).
+- App-managed "Auto switch to input": re-selects the chosen input after startup or wake only when
+  the panel reports a different one; the panel's own Auto Source stays OSD-only.
+- Self-contained single-file portable build (`AcerFALDv2.exe`) with its own mutex, tray identity,
+  config and log; no .NET runtime required.
+- Console engine commands (`state`, `sync`, `watch`, `set`, `white`, `gamma`, `hdr`, `volume`,
+  `input`, `probe`, `restore`) for diagnostics and scripted use.
+- Documentation set: hardware/HDR/FALD findings, DDC map, recon notes, engine CLI/config
+  reference, portable build notes, and this changelog.
+
+### Fixed
+
+- OSD/DDC sync: brightness, contrast, volume and input changed with the monitor's own joystick
+  were not read back, so the UI silently drifted from the panel. The UI now reads these values
+  every 2.5 s and updates the sliders and active input.
+- Stale DDC handle after an input change: Windows re-enumerates the display and invalidates the
+  physical-monitor handle, leaving every later read/write failing until an app restart. The app
+  now pings the panel, re-acquires the handle, retries the operation, refuses to bind to an
+  unrelated display, and recovers automatically; the four input buttons stay usable while the
+  panel is away and the tray has a manual **Reconnect to monitor** action. The console watcher
+  recovers the same way.
+
+### Notes
+
+- Requires Windows 10/11 x64 with DDC/CI enabled in the monitor OSD. Tested on the XV275K P5.
+- The portable build is attached to the GitHub release; building from source needs the .NET 8 SDK.
+- Clean-room implementation: the shipped build contains no Acer binaries, logos, assets or
+  decompiled vendor code.
+- Full release notes: [docs/releases/v1.0.0.md](docs/releases/v1.0.0.md).

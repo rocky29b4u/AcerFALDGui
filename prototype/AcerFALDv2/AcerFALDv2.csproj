@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>x64</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyName>AcerFALDv2</AssemblyName>
+    <RootNamespace>FaldSync.UI</RootNamespace>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <InvariantGlobalization>true</InvariantGlobalization>
+
+    <Product>AcerFALDv2</Product>
+    <Title>AcerFALDv2</Title>
+    <Description>Portable HDR + FALD control for Acer XV275K P5</Description>
+    <Version>2.2.0</Version>
+    <FileVersion>2.2.0.0</FileVersion>
+    <AssemblyVersion>2.2.0.0</AssemblyVersion>
+
+    <!-- Portable single-file publish: the RID and self-contained flag are supplied by
+         the publish command (see README) so a plain `dotnet build` still works. -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <PublishTrimmed>false</PublishTrimmed>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FaldSync\FaldSync.csproj" />
+  </ItemGroup>
+
+  <!-- The engine project also ships a faldsync.json template. Let that publish first,
+       then replace it with this app's current defaults after a successful publish. -->
+  <Target Name="CopyAcerFaldConfig" AfterTargets="Publish">
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\faldsync.json"
+          DestinationFolder="$(PublishDir)"
+          SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>
